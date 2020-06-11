@@ -24,9 +24,9 @@ int main()
 {
 	struct Array arr = {{2,4,6,8,10}, 10, 5};
 	append(&arr, 14);
-    insert(&arr, 5, 12);
-    printf("Deleted element: %d\n", delete(&arr, 6));
-    printf("Linear search: %d\n", linear_search(&arr, 4));
+    	insert(&arr, 5, 12);
+    	printf("Deleted element: %d\n", delete(&arr, 6));
+    	printf("Linear search: %d\n", linear_search(&arr, 4));
 	display(arr);
 	printf("\n");
 	printf("Binary search: %d\n", binary_search(12));
