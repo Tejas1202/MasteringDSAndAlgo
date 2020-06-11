@@ -16,6 +16,12 @@ int linear_search(struct Array *arr, int key);
 void swap(int *x, int *y);
 int binary_search(int key);
 int recursive_binary_search(int key, int low, int high);
+int get(struct Array arr, int index);
+void set(struct Array *arr, int index, int x);
+int max(struct Array arr);
+int min(struct Array arr);
+float Average(struct Array arr);
+
 
 // Sorted array for binary search
 struct Array array = {{5,8,10,12,14,20,25,28,30,35}, 10, 10};
@@ -24,9 +30,9 @@ int main()
 {
 	struct Array arr = {{2,4,6,8,10}, 10, 5};
 	append(&arr, 14);
-    	insert(&arr, 5, 12);
-    	printf("Deleted element: %d\n", delete(&arr, 6));
-    	printf("Linear search: %d\n", linear_search(&arr, 4));
+    insert(&arr, 5, 12);
+    printf("Deleted element: %d\n", delete(&arr, 6));
+    printf("Linear search: %d\n", linear_search(&arr, 4));
 	display(arr);
 	printf("\n");
 	printf("Binary search: %d\n", binary_search(12));
@@ -143,4 +149,65 @@ int recursive_binary_search(int key, int low, int high)
             return recursive_binary_search(key, mid + 1, high);
     }
     return -1;
+}
+
+// Gets an element at specified index
+int get(struct Array arr, int index)
+{
+    if (index >= 0 && index <= arr.length)
+        return arr[index];
+
+    return -1;
+}
+
+// Sets an elements to the specified index
+void set(struct Array *arr, int index, int x)
+{
+    if (index >= 0 && index < arr -> length)
+        arr -> A[index] = x;
+}
+
+// Maximum
+int max(struct Array arr)
+{
+    int max = arr.A[0];
+    for (int i = 1; i < arr.length; i++)
+    {
+        if (arr.A[i] > max)
+        {
+            max = arr.A[i];
+        }
+    }
+    return max;
+}
+
+// Minimum
+int min(struct Array arr)
+{
+    int min = arr.A[0];
+    for (int i = 1; i < arr.length; i++)
+    {
+        if (arr.A[i] < min)
+        {
+            min = arr.A[i];
+        }
+    }
+    return min;
+}
+
+// Sum of all elements
+int sum(struct Array arr)
+{
+    int sum = 0;
+    for (int i = 0; i < arr.length; i++)
+    {
+        sum += arr.A[i];
+    }
+    return sum;
+}
+
+// Average of all elements
+float Average(struct Array arr)
+{
+    return (float) sum(arr) / arr.length;
 }
