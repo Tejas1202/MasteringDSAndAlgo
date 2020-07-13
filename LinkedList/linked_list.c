@@ -25,13 +25,15 @@ struct Node * linear_search(struct Node *p, int key);
 struct Node* recursive_linear_search(struct Node *p, int key);
 void insert(struct Node *p, int index, int x);
 int delete(struct Node *p, int index);
+void reverse_list(struct Node *p);
+void reverse_list_two(struct Node *p);
+void recursive_reverse_list(struct Node *q, struct Node *p);
 
 int main(void)
 {
     int A[] = {2, 3, 4, 5, 6};
     create(A, 5);
     display(first);
-    printf("\n");
     recursive_display(first);
     printf("\n");
     printf("Length of linked list: %d\n", count(first));
@@ -47,7 +49,6 @@ int main(void)
     else
         printf("Key not found\n");
     display(first);
-    printf("\n");
 
     temp = recursive_linear_search(first, 15);
     if (temp != NULL)
@@ -61,6 +62,15 @@ int main(void)
 
     printf("Deleted element: %d\n", delete(first, 1));
     printf("Deleted element: %d\n", delete(first, 3));
+    display(first);
+
+    // Reversing lists
+    printf("Reversing linked lists\n");
+    reverse_list(first);
+    display(first);
+    reverse_list_two(first);
+    display(first);
+    recursive_reverse_list(NULL, first);
     display(first);
 }
 
@@ -93,6 +103,7 @@ void display(struct Node *p)
         printf("%d ", p -> data);
         p = p -> next;
     }
+    printf("\n");
 }
 
 // Change the order of printf and display if we want to print linked list in reverse order
@@ -253,5 +264,52 @@ int delete(struct Node *p, int index)
         x = p -> data;
         free(p);
         return x;
+    }
+}
+
+// Reversing list using auxiliary array
+void reverse_list(struct Node *p)
+{
+    struct Node *q = p;
+    int *A = (int *)malloc(count(p) * sizeof(int));
+    int i = 0;
+    while (q != NULL)
+    {
+        A[i++] = q -> data;
+        q = q -> next;
+    }
+    q = p;
+    i--;
+    while (q != NULL)
+    {
+        q -> data = A[i--];
+        q = q -> next;
+    }
+}
+
+// Reversing list by reversing links using sliding pointers (recommended)
+void reverse_list_two(struct Node *p)
+{
+    struct Node *q = NULL, *r = NULL;
+    while (p != NULL)
+    {
+        r = q;
+        q = p;
+        p = p -> next;
+        q -> next = r;
+    }
+    first = q;
+}
+
+void recursive_reverse_list(struct Node *q, struct Node *p)
+{
+    if (p != NULL)
+    {
+        recursive_reverse_list(p, p -> next);
+        p -> next = q;
+    }
+    else
+    {
+        first = q;
     }
 }
