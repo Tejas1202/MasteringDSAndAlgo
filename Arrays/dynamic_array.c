@@ -1,4 +1,4 @@
-/ Creating Dynamic arrays
+// Creating Dynamic arrays
 #include <stdio.h>
 #include <stdlib.h>
 
